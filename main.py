@@ -1,6 +1,12 @@
-def main():
-    print("Hello from image-to-grayscale!")
+from PIL import Image
+import os, sys
 
-
-if __name__ == "__main__":
-    main()
+for infile in sys.argv[1:]:
+    f, e = os.path.splitext(infile)
+    outfile = f + ".jpg"
+    if infile != outfile:
+        try:
+            with Image.open(infile) as im:
+                im.save(outfile)
+        except OSError:
+            print("cannot convert", infile)
